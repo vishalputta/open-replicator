@@ -86,6 +86,8 @@ public final class Metadata implements Serializable
 				case MySQLConstants.TYPE_MEDIUM_BLOB :
 				case MySQLConstants.TYPE_LONG_BLOB :
 				case MySQLConstants.TYPE_TIMESTAMP2 :
+				case MySQLConstants.TYPE_TIME2 :
+				case MySQLConstants.TYPE_DATETIME2 :
 					metadata[i] = d.readInt(1);
 					break;
 				case MySQLConstants.TYPE_BIT :

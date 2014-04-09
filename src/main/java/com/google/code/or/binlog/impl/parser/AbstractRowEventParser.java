@@ -96,6 +96,7 @@ public abstract class AbstractRowEventParser extends AbstractBinlogEventParser
 			int length = 0;
 			final int meta = metadata.getMetadata(i);
 			int type = CodecUtils.toUnsigned(types[i]);
+			int fspLen = 0; // fraction second part length for time data types
 			if (type == MySQLConstants.TYPE_STRING && meta > 256)
 			{
 				final int meta0 = meta >> 8;
@@ -120,8 +121,13 @@ public abstract class AbstractRowEventParser extends AbstractBinlogEventParser
 					}
 				}
 			}
+			else if (type == MySQLConstants.TYPE_TIMESTAMP2 || type == MySQLConstants.TYPE_TIME2
+			        || type == MySQLConstants.TYPE_DATETIME2)
+			{
+				// http://dev.mysql.com/doc/internals/en/date-and-time-data-type-representation.html
+				fspLen = meta > 0 ? (meta + 1) >> 1 : 0;
+			}
 
-			//
 			if (!usedColumns.get(i))
 			{
 				unusedColumnCount++;
@@ -167,12 +173,22 @@ public abstract class AbstractRowEventParser extends AbstractBinlogEventParser
 					columns.add(TimeColumn.valueOf(MySQLUtils.toTime(is.readInt(3))));
 					break;
 				case MySQLConstants.TYPE_TIMESTAMP2 :
-					long tsVal = CodecUtils.convertBigEndianToLong(is.readBytes(4), 4);
-					// fractional seconds precision
-					// #http://dev.mysql.com/doc/internals/en/date-and-time-data-type-representation.html
-					int fspLen = meta > 0 ? (meta + 1) >> 1 : 0;
-					int fspVal = fspLen > 0 ? (int) CodecUtils.convertBigEndianToLong(is.readBytes(fspLen), fspLen) : 0;
-					columns.add(TimestampColumn.valueOf(MySQLUtils.toTimestamp(tsVal, fspVal, meta)));
+					columns.add(TimestampColumn.valueOf(MySQLUtils.toTimestamp(
+					        CodecUtils.convertBigEndianToLong(is.readBytes(4), 4),
+					        fspLen > 0 ? (int) CodecUtils.convertBigEndianToLong(is.readBytes(fspLen), fspLen) : 0,
+					        fspLen)));
+					break;
+				case MySQLConstants.TYPE_TIME2 :
+					columns.add(TimeColumn.valueOf(MySQLUtils.toTime(
+					        CodecUtils.convertBigEndianToLong(is.readBytes(3), 3),
+					        fspLen > 0 ? (int) CodecUtils.convertBigEndianToLong(is.readBytes(fspLen), fspLen) : 0,
+					        fspLen)));
+					break;
+				case MySQLConstants.TYPE_DATETIME2 :
+					columns.add(DatetimeColumn.valueOf(MySQLUtils.toDatetime(
+					        CodecUtils.convertBigEndianToLong(is.readBytes(5), 5),
+					        fspLen > 0 ? (int) CodecUtils.convertBigEndianToLong(is.readBytes(fspLen), fspLen) : 0,
+					        fspLen)));
 					break;
 				case MySQLConstants.TYPE_TIMESTAMP :
 					columns.add(TimestampColumn.valueOf(MySQLUtils.toTimestamp(is.readLong(4))));

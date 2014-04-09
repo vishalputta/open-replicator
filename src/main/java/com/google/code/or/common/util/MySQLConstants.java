@@ -117,7 +117,6 @@ public final class MySQLConstants
 	public static final int TYPE_DOUBLE = 5;
 	public static final int TYPE_NULL = 6;
 	public static final int TYPE_TIMESTAMP = 7;
-	public static final int TYPE_TIMESTAMP2 = 17;
 	public static final int TYPE_LONGLONG = 8;
 	public static final int TYPE_INT24 = 9;
 	public static final int TYPE_DATE = 10;
@@ -127,6 +126,9 @@ public final class MySQLConstants
 	public static final int TYPE_NEWDATE = 14;
 	public static final int TYPE_VARCHAR = 15;
 	public static final int TYPE_BIT = 16;
+	public static final int TYPE_TIMESTAMP2 = 17;
+	public static final int TYPE_DATETIME2 = 18;
+	public static final int TYPE_TIME2 = 19;
 	public static final int TYPE_NEWDECIMAL = 246;
 	public static final int TYPE_ENUM = 247;
 	public static final int TYPE_SET = 248;

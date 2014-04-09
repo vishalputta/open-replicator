@@ -15,6 +15,7 @@
 package com.google.code.or.common.util;
 
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.util.Calendar;
 
 /**
@@ -70,6 +71,18 @@ public final class MySQLUtils
 		return new java.sql.Time(c.getTimeInMillis());
 	}
 
+	public static java.sql.Time toTime(long tval, int fsp, int fspLen)
+	{
+
+		tval = (tval - 0x800000L) & 0xBFFFFFL;
+		// nanos=(fsp > 0 ? convertToNanos(fsp, fspLen) : 0);
+		Time time =
+		        java.sql.Time
+		                .valueOf((int) (tval >> 12) + ":" + (int) ((tval >> 6) & 0x3F) + ":" + (int) (tval & 0x3F));
+
+		return time;
+	}
+
 	public static java.util.Date toDatetime(long value)
 	{
 		final int sec = (int) (value % 100);
@@ -85,6 +98,17 @@ public final class MySQLUtils
 		final Calendar c = Calendar.getInstance();
 		c.set(year, mon - 1, day, hour, min, sec);
 		return c.getTime();
+	}
+
+	public static java.util.Date toDatetime(long value, int fsp, int fspLen)
+	{
+		value = (value - 0x8000000000L) & 0xFFFFFFFFFFL;
+		final Calendar c = Calendar.getInstance();
+		// nanos=(fsp > 0 ? convertToNanos(fsp, fspLen) : 0);
+		c.set((int) ((value >> 22) / 13), (int) ((value >> 22) % 13) - 1, (int) ((value >> 17) & 0x1F),
+		        (int) ((value >> 12) & 0x1F), (int) ((value >> 6) & 0x3F), (int) (value & 0x3F));
+		return c.getTime();
+
 	}
 
 	public static java.sql.Timestamp toTimestamp(long value)
@@ -149,32 +173,15 @@ public final class MySQLUtils
 		return (ipDigits << 2) + DECIMAL_BINARY_SIZE[ipDigitsX] + (fpDigits << 2) + DECIMAL_BINARY_SIZE[fpDigitsX];
 	}
 
-	public static java.sql.Timestamp toTimestamp(long value, int fsp, int meta)
+	public static java.sql.Timestamp toTimestamp(long value, int fsp, int fspLen)
 	{
 		java.sql.Timestamp ts = toTimestamp(value);
-		ts.setNanos(fsp > 0 ? convertToNanos(fsp, meta) : 0);
+		ts.setNanos(fsp > 0 ? convertToNanos(fsp, fspLen) : 0);
 		return ts;
 	}
 
-	private static int convertToNanos(int fspVal, int meta)
+	private static int convertToNanos(int fspVal, int fspLen)
 	{
-		int nanos = fspVal * 1000;
-		switch (meta)
-		{
-			case 1 :
-			case 2 :
-				nanos *= 10000;
-				break;
-			case 3 :
-			case 4 :
-				nanos *= 100;
-				break;
-			case 5 :
-			case 6 :
-				break;
-			default :
-				break;
-		}
-		return nanos;
+		return (fspVal * 1000 * (int) Math.pow(10, (3 - fspLen) * 2));
 	}
 }
