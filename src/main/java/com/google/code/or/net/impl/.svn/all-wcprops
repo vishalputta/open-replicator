@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/net/impl
+END
+AbstractTransport.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/17/trunk/open-replicator/src/main/java/com/google/code/or/net/impl/AbstractTransport.java
+END
+TransportInputStreamImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/net/impl/TransportInputStreamImpl.java
+END
+TransportOutputStreamImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/net/impl/TransportOutputStreamImpl.java
+END
+AuthenticatorImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/net/impl/AuthenticatorImpl.java
+END
+TransportImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/!svn/ver/45/trunk/open-replicator/src/main/java/com/google/code/or/net/impl/TransportImpl.java
+END

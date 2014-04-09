@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/41/trunk/open-replicator/src/test/java/com/google/code/or/logging
+END
+Log4jInitializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/41/trunk/open-replicator/src/test/java/com/google/code/or/logging/Log4jInitializer.java
+END
+log4j.dtd
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/41/trunk/open-replicator/src/test/java/com/google/code/or/logging/log4j.dtd
+END
+log4j.xml
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/41/trunk/open-replicator/src/test/java/com/google/code/or/logging/log4j.xml
+END

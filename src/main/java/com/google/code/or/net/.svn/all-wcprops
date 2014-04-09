@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/net
+END
+TransportContext.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/net/TransportContext.java
+END
+Packet.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/net/Packet.java
+END
+TransportInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/net/TransportInputStream.java
+END
+TransportOutputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/net/TransportOutputStream.java
+END
+TransportException.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/net/TransportException.java
+END
+Transport.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/12/trunk/open-replicator/src/main/java/com/google/code/or/net/Transport.java
+END

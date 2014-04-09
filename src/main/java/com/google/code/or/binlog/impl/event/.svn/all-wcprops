@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event
+END
+UpdateRowsEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/UpdateRowsEvent.java
+END
+IncidentEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/IncidentEvent.java
+END
+RotateEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/RotateEvent.java
+END
+IntvarEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/IntvarEvent.java
+END
+QueryEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/105/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/QueryEvent.java
+END
+UpdateRowsEventV2.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/UpdateRowsEventV2.java
+END
+WriteRowsEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/WriteRowsEvent.java
+END
+AbstractBinlogEventV4.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/AbstractBinlogEventV4.java
+END
+WriteRowsEventV2.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/WriteRowsEventV2.java
+END
+DeleteRowsEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/DeleteRowsEvent.java
+END
+BinlogEventV4HeaderImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/91/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/BinlogEventV4HeaderImpl.java
+END
+RandEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/RandEvent.java
+END
+XidEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/XidEvent.java
+END
+DeleteRowsEventV2.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/!svn/ver/111/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/DeleteRowsEventV2.java
+END
+TableMapEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/TableMapEvent.java
+END
+StopEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/StopEvent.java
+END
+UserVarEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/UserVarEvent.java
+END
+AbstractRowEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/AbstractRowEvent.java
+END
+FormatDescriptionEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/event/FormatDescriptionEvent.java
+END

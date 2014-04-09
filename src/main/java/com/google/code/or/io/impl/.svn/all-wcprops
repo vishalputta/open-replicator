@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/28/trunk/open-replicator/src/main/java/com/google/code/or/io/impl
+END
+SocketFactoryImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/io/impl/SocketFactoryImpl.java
+END
+XInputStreamImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/28/trunk/open-replicator/src/main/java/com/google/code/or/io/impl/XInputStreamImpl.java
+END
+XOutputStreamImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/io/impl/XOutputStreamImpl.java
+END

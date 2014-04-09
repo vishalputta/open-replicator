@@ -1,13 +1,11 @@
 /**
  * Licensed to the Apache Software Foundation (ASF) under one or more
- * contributor license agreements.  See the NOTICE file distributed with
+ * contributor license agreements. See the NOTICE file distributed with
  * this work for additional information regarding copyright ownership.
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
- * the License.  You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * the License. You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,16 +15,16 @@
 package com.google.code.or.common.util;
 
 /**
- * 
  * @author Jingqi Xu
  */
-public final class MySQLConstants {
+public final class MySQLConstants
+{
 	//
-	public static final byte[] BINLOG_MAGIC = new byte[]{(byte)0xfe, (byte)0x62, (byte)0x69, (byte)0x6e};
-	
+	public static final byte[] BINLOG_MAGIC = new byte[]{(byte) 0xfe, (byte) 0x62, (byte) 0x69, (byte) 0x6e};
+
 	//
 	public static final int MAX_PACKET_LENGTH = (256 * 256 * 256 - 1);
-	
+
 	// Client capabilities
 	public static final int CLIENT_LONG_PASSWORD = 1; /* new more secure passwords */
 	public static final int CLIENT_FOUND_ROWS = 2; /* Found instead of affected rows */
@@ -42,7 +40,7 @@ public final class MySQLConstants {
 	public static final int CLIENT_SSL = 2048; /* Switch to SSL after handshake */
 	public static final int CLIENT_IGNORE_SIGPIPE = 4096; /* IGNORE sigpipes */
 	public static final int CLIENT_TRANSACTIONS = 8192; /* Client knows about transactions */
-	public static final int CLIENT_RESERVED = 16384; /* Old flag for 4.1 protocol  */
+	public static final int CLIENT_RESERVED = 16384; /* Old flag for 4.1 protocol */
 	public static final int CLIENT_SECURE_CONNECTION = 32768; /* New 4.1 authentication */
 	public static final int CLIENT_MULTI_STATEMENTS = 1 << 16; /* Enable/disable multi-stmt support */
 	public static final int CLIENT_MULTI_RESULTS = 1 << 17; /* Enable/disable multi-results */
@@ -50,7 +48,7 @@ public final class MySQLConstants {
 	public static final int CLIENT_PLUGIN_AUTH = 1 << 19; /* Client supports plugin authentication */
 	public static final int CLIENT_SSL_VERIFY_SERVER_CERT = 1 << 30;
 	public static final int CLIENT_REMEMBER_OPTIONS = 1 << 31;
-	
+
 	// Command
 	public static final int COM_SLEEP = 0x00;
 	public static final int COM_QUIT = 0x01;
@@ -83,7 +81,7 @@ public final class MySQLConstants {
 	public static final int COM_STMT_FETCH = 0x1c;
 	public static final int COM_DAEMON = 0x1d;
 	public static final int COM_END = 0x1e;
-	
+
 	// Status variable type
 	public static final int Q_FLAGS2_CODE = 0;
 	public static final int Q_SQL_MODE_CODE = 1;
@@ -97,14 +95,19 @@ public final class MySQLConstants {
 	public static final int Q_TABLE_MAP_FOR_UPDATE_CODE = 9;
 	public static final int Q_MASTER_DATA_WRITTEN_CODE = 10;
 	public static final int Q_INVOKER = 11;
-	
+	public static final int Q_UPDATED_DB_NAMES = 12;
+	public static final int Q_MICROSECONDS = 13;
+
+	public static final int MAX_DBS_IN_EVENT_MTS = 16;
+	public static final int OVER_MAX_DBS_IN_EVENT_MTS = 254;
+
 	// User variable type
 	public static final int STRING_RESULT = 0;
 	public static final int REAL_RESULT = 1;
-	public static final int INT_RESULT = 2; 
-	public static final int ROW_RESULT =3;
+	public static final int INT_RESULT = 2;
+	public static final int ROW_RESULT = 3;
 	public static final int DECIMAL_RESULT = 4;
-	
+
 	// Column type
 	public static final int TYPE_DECIMAL = 0;
 	public static final int TYPE_TINY = 1;
@@ -114,6 +117,7 @@ public final class MySQLConstants {
 	public static final int TYPE_DOUBLE = 5;
 	public static final int TYPE_NULL = 6;
 	public static final int TYPE_TIMESTAMP = 7;
+	public static final int TYPE_TIMESTAMP2 = 17;
 	public static final int TYPE_LONGLONG = 8;
 	public static final int TYPE_INT24 = 9;
 	public static final int TYPE_DATE = 10;
@@ -133,7 +137,7 @@ public final class MySQLConstants {
 	public static final int TYPE_VAR_STRING = 253;
 	public static final int TYPE_STRING = 254;
 	public static final int TYPE_GEOMETRY = 255;
-	
+
 	// SQL modes
 	public static final long SM_LREAL_AS_FLOATL = 0x1L;
 	public static final long SM_LPIPES_AS_CONCATL = 0x2L;
@@ -167,7 +171,7 @@ public final class MySQLConstants {
 	public static final long SM_LHIGH_NOT_PRECEDENCEL = 0x20000000L;
 	public static final long SM_LNO_ENGINE_SUBSTITUTIONL = 0x40000000L;
 	public static final long SM_LPAD_CHAR_TO_FULL_LENGTHL = 0x80000000L;
-	
+
 	// sql/log_event.h
 	public static final int UNKNOWN_EVENT = 0;
 	public static final int START_EVENT_V3 = 1;
@@ -188,13 +192,21 @@ public final class MySQLConstants {
 	public static final int XID_EVENT = 16;
 	public static final int BEGIN_LOAD_QUERY_EVENT = 17;
 	public static final int EXECUTE_LOAD_QUERY_EVENT = 18;
-	public static final int TABLE_MAP_EVENT  = 19;
-	public static final int PRE_GA_WRITE_ROWS_EVENT  = 20;
-	public static final int PRE_GA_UPDATE_ROWS_EVENT  = 21;
-	public static final int PRE_GA_DELETE_ROWS_EVENT  = 22;
-	public static final int WRITE_ROWS_EVENT  = 23;
-	public static final int UPDATE_ROWS_EVENT  = 24;
-	public static final int DELETE_ROWS_EVENT  = 25;
+	public static final int TABLE_MAP_EVENT = 19;
+	public static final int PRE_GA_WRITE_ROWS_EVENT = 20;
+	public static final int PRE_GA_UPDATE_ROWS_EVENT = 21;
+	public static final int PRE_GA_DELETE_ROWS_EVENT = 22;
+	public static final int WRITE_ROWS_EVENT = 23;
+	public static final int UPDATE_ROWS_EVENT = 24;
+	public static final int DELETE_ROWS_EVENT = 25;
 	public static final int INCIDENT_EVENT = 26;
 	public static final int HEARTBEAT_LOG_EVENT = 27;
+	public static final int IGNORABLE_LOG_EVENT = 28;
+	public static final int ROWS_QUERY_LOG_EVENT = 29;
+	public static final int WRITE_ROWS_EVENT_V2 = 30;
+	public static final int UPDATE_ROWS_EVENT_V2 = 31;
+	public static final int DELETE_ROWS_EVENT_V2 = 32;
+	public static final int GTID_LOG_EVENT = 33;
+	public static final int ANONYMOUS_GTID_LOG_EVENT = 34;
+	public static final int PREVIOUS_GTIDS_LOG_EVENT = 35;
 }

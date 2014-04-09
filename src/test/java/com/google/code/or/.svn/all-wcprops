@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/115/trunk/open-replicator/src/test/java/com/google/code/or
+END
+QueryTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/69/trunk/open-replicator/src/test/java/com/google/code/or/QueryTest.java
+END
+OpenReplicatorTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/81/trunk/open-replicator/src/test/java/com/google/code/or/OpenReplicatorTest.java
+END
+OpenParserTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/!svn/ver/115/trunk/open-replicator/src/test/java/com/google/code/or/OpenParserTest.java
+END

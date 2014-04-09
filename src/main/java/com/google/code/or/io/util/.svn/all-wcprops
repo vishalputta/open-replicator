@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/!svn/ver/77/trunk/open-replicator/src/main/java/com/google/code/or/io/util
+END
+XSerializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/io/util/XSerializer.java
+END
+ActiveBufferedInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/!svn/ver/77/trunk/open-replicator/src/main/java/com/google/code/or/io/util/ActiveBufferedInputStream.java
+END
+XDeserializer.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/io/util/XDeserializer.java
+END
+RamdomAccessFileInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/67/trunk/open-replicator/src/main/java/com/google/code/or/io/util/RamdomAccessFileInputStream.java
+END

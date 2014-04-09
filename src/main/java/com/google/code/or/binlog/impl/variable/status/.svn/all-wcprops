@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/106/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status
+END
+QUpdatedDBNames.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/!svn/ver/106/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QUpdatedDBNames.java
+END
+QCharsetCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QCharsetCode.java
+END
+QTimeZoneCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QTimeZoneCode.java
+END
+QMicroseconds.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/!svn/ver/106/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QMicroseconds.java
+END
+QTableMapForUpdateCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QTableMapForUpdateCode.java
+END
+AbstractStatusVariable.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/AbstractStatusVariable.java
+END
+QLcTimeNamesCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QLcTimeNamesCode.java
+END
+QMasterDataWrittenCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QMasterDataWrittenCode.java
+END
+QSQLModeCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QSQLModeCode.java
+END
+QCatalogCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QCatalogCode.java
+END
+QCharsetDatabaseCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QCharsetDatabaseCode.java
+END
+QFlags2Code.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QFlags2Code.java
+END
+QInvoker.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QInvoker.java
+END
+QCatalogNzCode.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QCatalogNzCode.java
+END
+QAutoIncrement.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/!svn/ver/3/trunk/open-replicator/src/main/java/com/google/code/or/binlog/impl/variable/status/QAutoIncrement.java
+END
