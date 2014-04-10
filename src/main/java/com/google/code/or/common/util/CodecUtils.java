@@ -277,26 +277,4 @@ public final class CodecUtils
 		return ret;
 	}
 
-	public static int convertToNanos(int fspVal, int meta)
-	{
-		int nanos = fspVal * 1000;
-		switch (meta)
-		{
-			case 1 :
-			case 2 :
-				nanos *= 10000;
-				break;
-			case 3 :
-			case 4 :
-				nanos *= 100;
-				break;
-			case 5 :
-			case 6 :
-				break;
-			default :
-				break;
-		}
-		return nanos;
-	}
-
 }
