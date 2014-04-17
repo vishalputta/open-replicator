@@ -30,9 +30,9 @@ public class OpenReplicatorTest
 		or.setPassword("or_test");
 		or.setHost("localhost");
 		or.setPort(33066);
-		or.setServerId(1);
-		or.setBinlogPosition(4924);
-		or.setBinlogFileName("mysql-bin.000003");
+		or.setServerId(65535);
+		or.setBinlogPosition(120);
+		or.setBinlogFileName("mysql-bin.000005");
 		or.setBinlogEventListener(new BinlogEventListener()
 		{
 			public void onEvents(BinlogEventV4 event)
