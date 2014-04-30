@@ -8,7 +8,14 @@
   <packaging>jar</packaging>
 
   <name>open-replicator</name>
-  <url>http://code.google.com/p/open-replicator/</url>
+ <distributionManagement>
+    <repository>
+        <id>artifactory-new</id>
+        <name>artifactory-new-releases</name>
+        <url>http://artifactory.nm.flipkart.com:8081/artifactory/ext-release-local</url>
+    </repository>
+</distributionManagement>
+
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
