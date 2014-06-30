@@ -19,8 +19,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.code.or.binlog.BinlogEventListener;
 import com.google.code.or.binlog.BinlogParser;
+import com.google.code.or.binlog.BinlogParserContext;
 import com.google.code.or.binlog.BinlogParserListener;
 import com.google.code.or.binlog.impl.ChecksumType;
 import com.google.code.or.binlog.impl.ReplicationBasedBinlogParser;
@@ -41,6 +45,8 @@ import com.google.code.or.binlog.impl.parser.WriteRowsEventParser;
 import com.google.code.or.binlog.impl.parser.WriteRowsEventV2Parser;
 import com.google.code.or.binlog.impl.parser.XidEventParser;
 import com.google.code.or.common.glossary.column.StringColumn;
+import com.google.code.or.common.util.BackoffTimer;
+import com.google.code.or.common.util.BackoffTimer.BackoffTimerConfig;
 import com.google.code.or.common.util.QueryUtil;
 import com.google.code.or.io.impl.SocketFactoryImpl;
 import com.google.code.or.net.Packet;
@@ -57,6 +63,7 @@ import com.google.code.or.net.impl.packet.command.ComBinlogDumpPacket;
  */
 public class OpenReplicator
 {
+	private static final Logger LOGGER = LoggerFactory.getLogger(QueryUtil.class);
 	//
 	protected int port = 3306;
 	protected String host;
@@ -75,6 +82,31 @@ public class OpenReplicator
 	protected BinlogParser binlogParser;
 	protected BinlogEventListener binlogEventListener;
 	protected final AtomicBoolean running = new AtomicBoolean(false);
+	protected BackoffTimer retryCounter = new BackoffTimer(new BackoffTimerConfig(1, 60000, 2, 5, 20), "parserRetry");
+
+	private class ORBinlogParserListener implements BinlogParserListener
+	{
+
+		public void onStart(BinlogParser parser)
+		{
+
+		}
+
+		public void onStop(BinlogParser parser)
+		{
+			stopQuietly(0, TimeUnit.MILLISECONDS);
+
+		}
+
+		public void onException(BinlogParser parser, Exception exception)
+		{
+			LOGGER.error("Exception occured in binlogParser", exception);
+			LOGGER.info("Retrying the prassing from : " + parser.getContext().getBinlogFileName() + ":"
+			        + parser.getContext().getCurrentPosition());
+			retry(parser.getContext());
+		}
+
+	}
 
 	/**
 	 * 
@@ -100,17 +132,32 @@ public class OpenReplicator
 		if (this.binlogParser == null)
 			this.binlogParser = getDefaultBinlogParser();
 		this.binlogParser.setEventListener(this.binlogEventListener);
-		this.binlogParser.addParserListener(new BinlogParserListener.Adapter()
-		{
-			@Override
-			public void onStop(BinlogParser parser)
-			{
-				stopQuietly(0, TimeUnit.MILLISECONDS);
-			}
-		});
 		this.binlogParser.setChecksumLength(fetchBinlogChecksum(this.transport).getLength());
-		dumpBinlog();
+		this.binlogParser.addParserListener(new ORBinlogParserListener());
+
+		dumpBinLog(this.binlogFileName, this.binlogPosition);
 		this.binlogParser.start();
+	}
+
+	protected void dumpBinLog(String binlogFileName, long binlogPosition) throws Exception
+	{
+		//
+		final ComBinlogDumpPacket command = new ComBinlogDumpPacket();
+		command.setBinlogFlag(0);
+		command.setServerId(this.serverId);
+		command.setBinlogPosition(binlogPosition);
+		command.setBinlogFileName(StringColumn.valueOf(binlogFileName.getBytes(this.encoding)));
+		this.transport.getOutputStream().writePacket(command);
+		this.transport.getOutputStream().flush();
+
+		//
+		final Packet packet = this.transport.getInputStream().readPacket();
+		if (packet.getPacketBody()[0] == ErrorPacket.PACKET_MARKER)
+		{
+			final ErrorPacket error = ErrorPacket.valueOf(packet);
+			throw new TransportException(error);
+		}
+
 	}
 
 	public ChecksumType fetchBinlogChecksum(Transport transport) throws IOException
@@ -152,6 +199,34 @@ public class OpenReplicator
 		{
 			// NOP
 		}
+	}
+
+	public void retry(BinlogParserContext context)
+	{
+		try
+		{
+			stopQuietly(0, TimeUnit.MILLISECONDS);
+			if (retryCounter.backoff() < 0)
+				throw new Exception("No success with retry");
+			retryCounter.sleep();
+
+			this.transport = getDefaultTransport();
+			this.transport.connect(this.host, this.port);
+			this.binlogParser = getDefaultBinlogParser();
+			/** setting the current context */
+			this.binlogParser.setContext(context);
+			this.binlogParser.setEventListener(this.binlogEventListener);
+			this.binlogParser.setChecksumLength(fetchBinlogChecksum(this.transport).getLength());
+			this.binlogParser.addParserListener(new ORBinlogParserListener());
+
+			dumpBinLog(this.binlogFileName, this.binlogPosition);
+			this.binlogParser.start();
+		}
+		catch (Exception ex)
+		{
+			LOGGER.error("Failed to retry", ex);
+		}
+
 	}
 
 	/**
@@ -300,29 +375,6 @@ public class OpenReplicator
 		this.binlogEventListener = listener;
 	}
 
-	/**
-	 * 
-	 */
-	protected void dumpBinlog() throws Exception
-	{
-		//
-		final ComBinlogDumpPacket command = new ComBinlogDumpPacket();
-		command.setBinlogFlag(0);
-		command.setServerId(this.serverId);
-		command.setBinlogPosition(this.binlogPosition);
-		command.setBinlogFileName(StringColumn.valueOf(this.binlogFileName.getBytes(this.encoding)));
-		this.transport.getOutputStream().writePacket(command);
-		this.transport.getOutputStream().flush();
-
-		//
-		final Packet packet = this.transport.getInputStream().readPacket();
-		if (packet.getPacketBody()[0] == ErrorPacket.PACKET_MARKER)
-		{
-			final ErrorPacket error = ErrorPacket.valueOf(packet);
-			throw new TransportException(error);
-		}
-	}
-
 	protected Transport getDefaultTransport() throws Exception
 	{
 		//
@@ -349,7 +401,8 @@ public class OpenReplicator
 	protected ReplicationBasedBinlogParser getDefaultBinlogParser() throws Exception
 	{
 		//
-		final ReplicationBasedBinlogParser r = new ReplicationBasedBinlogParser();
+		final ReplicationBasedBinlogParser r =
+		        new ReplicationBasedBinlogParser(this.binlogFileName, this.binlogPosition);
 		r.registgerEventParser(new StopEventParser());
 		r.registgerEventParser(new RotateEventParser());
 		r.registgerEventParser(new IntvarEventParser());
@@ -369,7 +422,6 @@ public class OpenReplicator
 
 		//
 		r.setTransport(this.transport);
-		r.setBinlogFileName(this.binlogFileName);
 		return r;
 	}
 }

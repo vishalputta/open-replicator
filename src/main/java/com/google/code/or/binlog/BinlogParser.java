@@ -54,4 +54,9 @@ public interface BinlogParser
 	boolean removeParserListener(BinlogParserListener listener);
 
 	void setParserListeners(List<BinlogParserListener> listeners);
+
+	BinlogParserContext getContext();
+
+	void setContext(BinlogParserContext context);
+
 }

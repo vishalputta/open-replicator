@@ -38,13 +38,13 @@ public class ReplicationBasedBinlogParser extends AbstractBinlogParser
 
 	//
 	protected Transport transport;
-	protected String binlogFileName;
 
 	/**
 	 * 
 	 */
-	public ReplicationBasedBinlogParser()
+	public ReplicationBasedBinlogParser(String binlogFileName, Long currentPosition)
 	{
+		this.context = new Context(binlogFileName, currentPosition);
 	}
 
 	@Override
@@ -74,12 +74,12 @@ public class ReplicationBasedBinlogParser extends AbstractBinlogParser
 
 	public String getBinlogFileName()
 	{
-		return binlogFileName;
+		return context.getBinlogFileName();
 	}
 
-	public void setBinlogFileName(String binlogFileName)
+	public Long getCurrentPosition()
 	{
-		this.binlogFileName = binlogFileName;
+		return context.getCurrentPosition();
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class ReplicationBasedBinlogParser extends AbstractBinlogParser
 	{
 		//
 		final XInputStream is = this.transport.getInputStream();
-		final Context context = new Context(this.binlogFileName);
+
 		while (isRunning())
 		{
 			try
@@ -162,4 +162,5 @@ public class ReplicationBasedBinlogParser extends AbstractBinlogParser
 			}
 		}
 	}
+
 }

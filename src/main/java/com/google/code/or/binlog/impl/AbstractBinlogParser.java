@@ -58,6 +58,7 @@ public abstract class AbstractBinlogParser implements BinlogParser
 	protected final AtomicBoolean running = new AtomicBoolean(false);
 	protected final BinlogEventParser defaultParser = new NopEventParser();
 	protected final BinlogEventParser[] parsers = new BinlogEventParser[128];
+	protected BinlogParserContext context;
 
 	//
 	protected abstract void doParse() throws Exception;
@@ -184,6 +185,16 @@ public abstract class AbstractBinlogParser implements BinlogParser
 		this.clearTableMapEventsOnRotate = clearTableMapEventsOnRotate;
 	}
 
+	public BinlogParserContext getContext()
+	{
+		return context;
+	}
+
+	public void setContext(BinlogParserContext context)
+	{
+		this.context = context;
+	}
+
 	/**
 	 * 
 	 */
@@ -299,18 +310,6 @@ public abstract class AbstractBinlogParser implements BinlogParser
 			catch (Exception e)
 			{
 				notifyOnException(e);
-				LOGGER.error("failed to parse binlog", e);
-			}
-			finally
-			{
-				try
-				{
-					stop(0, TimeUnit.MILLISECONDS);
-				}
-				catch (Exception e)
-				{
-					LOGGER.error("failed to stop binlog parser", e);
-				}
 			}
 		}
 	}
@@ -319,6 +318,7 @@ public abstract class AbstractBinlogParser implements BinlogParser
 	{
 		//
 		private String binlogFileName;
+		private Long currentPosition;
 		private final Map<Long, TableMapEvent> tableMapEvents = new HashMap<Long, TableMapEvent>();
 
 		/**
@@ -328,9 +328,10 @@ public abstract class AbstractBinlogParser implements BinlogParser
 		{
 		}
 
-		public Context(String binlogFileName)
+		public Context(String binlogFileName, Long currentPosition)
 		{
 			this.binlogFileName = binlogFileName;
+			this.currentPosition = currentPosition;
 		}
 
 		/**
@@ -346,6 +347,16 @@ public abstract class AbstractBinlogParser implements BinlogParser
 			this.binlogFileName = name;
 		}
 
+		public Long getCurrentPosition()
+		{
+			return currentPosition;
+		}
+
+		public void setCurrentPosition(Long currentPosition)
+		{
+			this.currentPosition = currentPosition;
+		}
+
 		public final BinlogEventListener getEventListener()
 		{
 			return this;
@@ -354,6 +365,11 @@ public abstract class AbstractBinlogParser implements BinlogParser
 		public final TableMapEvent getTableMapEvent(long tableId)
 		{
 			return this.tableMapEvents.get(tableId);
+		}
+
+		public final Map<Long, TableMapEvent> getTableMapEvents()
+		{
+			return this.tableMapEvents;
 		}
 
 		/**
@@ -366,7 +382,7 @@ public abstract class AbstractBinlogParser implements BinlogParser
 			{
 				return;
 			}
-
+			this.currentPosition = event.getHeader().getPosition();
 			//
 			if (event instanceof TableMapEvent)
 			{
@@ -392,4 +408,5 @@ public abstract class AbstractBinlogParser implements BinlogParser
 			}
 		}
 	}
+
 }
