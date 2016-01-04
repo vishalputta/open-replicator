@@ -219,7 +219,7 @@ public class OpenReplicator
 			this.binlogParser.setChecksumLength(fetchBinlogChecksum(this.transport).getLength());
 			this.binlogParser.addParserListener(new ORBinlogParserListener());
 
-			dumpBinLog(this.binlogFileName, this.binlogPosition);
+			dumpBinLog(context.getBinlogFileName(), context.getCurrentPosition());
 			this.binlogParser.start();
 		}
 		catch (Exception ex)

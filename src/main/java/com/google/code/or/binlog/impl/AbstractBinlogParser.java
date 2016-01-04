@@ -382,7 +382,10 @@ public abstract class AbstractBinlogParser implements BinlogParser
 			{
 				return;
 			}
-			this.currentPosition = event.getHeader().getPosition();
+			if (event.getHeader().getPosition() > 0)
+			{
+				this.currentPosition = event.getHeader().getPosition();
+			}
 			//
 			if (event instanceof TableMapEvent)
 			{
@@ -393,6 +396,7 @@ public abstract class AbstractBinlogParser implements BinlogParser
 			{
 				final RotateEvent re = (RotateEvent) event;
 				this.binlogFileName = re.getBinlogFileName().toString();
+				this.currentPosition = re.getBinlogPosition();
 				if (isClearTableMapEventsOnRotate())
 					this.tableMapEvents.clear();
 			}
